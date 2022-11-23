@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+Based on [https://blog.logrocket.com/drag-and-drop-react-dnd/](https://blog.logrocket.com/drag-and-drop-react-dnd/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
