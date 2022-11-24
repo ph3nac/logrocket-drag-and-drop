@@ -1,5 +1,5 @@
 import "./App.css";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Dropzone from "./Dropzone";
 import cuid from "cuid";
 import ImageList from "./ImageList";
@@ -7,7 +7,8 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import update from "immutability-helper";
 
-function App() {
+const App = () => {
+  const ref = useRef();
   const [images, setImages] = useState([]);
   const moveImage = (dragIndex, hoverIndex) => {
     const draggableImage = images[dragIndex];
@@ -21,6 +22,9 @@ function App() {
     );
   };
   const onDrop = useCallback((acceptedFiles) => {
+    const div = ref.current;
+    div.className = "no-displayj";
+    ref.current.className = "no-display";
     acceptedFiles.map((file) => {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -37,12 +41,16 @@ function App() {
   return (
     <main className="App">
       <h1 className="text-center">Drag and Drop Example</h1>
-      <Dropzone onDrop={onDrop} accept={"image/*"} />
+      <Dropzone
+        _ref={ref}
+        onDrop={onDrop}
+        accept={{ "image/*": [".png", ".jpeg", ".jpg"] }}
+      />
       <DndProvider backend={HTML5Backend}>
         <ImageList images={images} moveImage={moveImage} />
       </DndProvider>
     </main>
   );
-}
+};
 
 export default App;

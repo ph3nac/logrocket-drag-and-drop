@@ -34,3 +34,7 @@ code {
   width: 300px;
   object-fit: cover;
 }
+
+.no-display {
+  display: none;
+}
